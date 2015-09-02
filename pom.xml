@@ -107,6 +107,7 @@
 
     <modules>
         <module>nevado-jms</module>
+        <module>nevado-shaded</module>
     </modules>
 
     <distributionManagement>

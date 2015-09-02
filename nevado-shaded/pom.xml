@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>nevado</artifactId>
+		<groupId>org.mitchellobs</groupId>
+		<version>1.3.2.1</version>
+	</parent>
+	<packaging>jar</packaging>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.oneviewcommerce</groupId>
+	<artifactId>nevado-shaded</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>org.mitchellobs</groupId>
+			<artifactId>nevado-jms</artifactId>
+			<version>1.3.2.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+					</filters>
+					<relocations>
+						<relocation>
+							<pattern>com.</pattern>
+							<shadedPattern>com.oneviewcommerce.shade.nevado.com.</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>org.apache.</pattern>
+							<shadedPattern>com.oneviewcommerce.shade.nevado.org.apache.</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>org.codehaus.</pattern>
+							<shadedPattern>com.oneviewcommerce.shade.nevado.org.codehaus.</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>org.joda.</pattern>
+							<shadedPattern>com.oneviewcommerce.shade.nevado.org.joda.</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>org.json.</pattern>
+							<shadedPattern>com.oneviewcommerce.shade.nevado.org.json.</shadedPattern>
+						</relocation>
+					</relocations>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
