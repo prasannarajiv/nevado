@@ -13,7 +13,6 @@ import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.*;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSAsyncClient;
-import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.amazonaws.services.sqs.model.CreateQueueRequest;
 import com.amazonaws.services.sqs.model.CreateQueueResult;
 import com.amazonaws.services.sqs.model.ListQueuesRequest;
@@ -21,6 +20,7 @@ import com.amazonaws.services.sqs.model.ListQueuesResult;
 import org.skyscreamer.nevado.jms.connector.AbstractSQSConnector;
 import org.skyscreamer.nevado.jms.connector.SQSMessage;
 import org.skyscreamer.nevado.jms.connector.SQSQueue;
+import org.skyscreamer.nevado.jms.connector.oneviewcommerce.OvcAmazonSQSClient;
 import org.skyscreamer.nevado.jms.destination.NevadoDestination;
 import org.skyscreamer.nevado.jms.destination.NevadoQueue;
 import org.skyscreamer.nevado.jms.destination.NevadoTopic;
@@ -72,7 +72,7 @@ public class AmazonAwsSQSConnector extends AbstractSQSConnector {
             _amazonSQS = new AmazonSQSAsyncClient(awsCredentials, clientConfiguration, executorService);
             _amazonSNS = new AmazonSNSAsyncClient(awsCredentials, clientConfiguration, executorService);
         } else {
-            _amazonSQS = new AmazonSQSClient(awsCredentials, clientConfiguration);
+            _amazonSQS = new OvcAmazonSQSClient(awsCredentials, clientConfiguration);
             _amazonSNS = new AmazonSNSClient(awsCredentials, clientConfiguration);
         }
     }

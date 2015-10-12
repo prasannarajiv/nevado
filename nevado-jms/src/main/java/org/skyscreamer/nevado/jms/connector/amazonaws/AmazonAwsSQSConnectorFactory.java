@@ -24,6 +24,20 @@ public class AmazonAwsSQSConnectorFactory extends AbstractSQSConnectorFactory {
     }
 
     protected AmazonAwsSQSConnector createConnector(String awsAccessKey, String awsSecretKey) {
+//        try {
+//            return new AmazonAwsSQSConnector(awsAccessKey, awsSecretKey, _isSecure, _receiveCheckIntervalMs, _useAsyncSend);
+//        } catch (AmazonClientException e) {
+//            try {
+//                OvcNewClassloader onc = new OvcNewClassloader(Thread.currentThread().getContextClassLoader());
+//                //Class aClass = onc.loadClass(e.getCause().getMessage());
+//                onc.invokeOvcShadedClass(e.getCause().getMessage());
+//            } catch (Exception exc) {
+//                exc.printStackTrace();
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return new AmazonAwsSQSConnector(awsAccessKey, awsSecretKey, _isSecure, _receiveCheckIntervalMs, _useAsyncSend);
     }
 
