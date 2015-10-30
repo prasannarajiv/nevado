@@ -34,8 +34,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Connector for SQS-only implementation of the Nevado JMS driver.
@@ -54,7 +52,6 @@ public class AmazonAwsSQSConnector extends AbstractSQSConnector {
 
     public AmazonAwsSQSConnector(String awsAccessKey, String awsSecretKey, boolean isSecure, long receiveCheckIntervalMs, boolean isAsync) {
         super(receiveCheckIntervalMs, isAsync);
-        //AWSCredentials awsCredentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
         ClientConfiguration clientConfiguration = new ClientConfiguration();
         String proxyHost = System.getProperty("http.proxyHost");
         String proxyPort = System.getProperty("http.proxyPort");
@@ -66,7 +63,6 @@ public class AmazonAwsSQSConnector extends AbstractSQSConnector {
         }  
         clientConfiguration.setProtocol(isSecure ? Protocol.HTTPS : Protocol.HTTP);
         if (isAsync) {
-            ExecutorService executorService = Executors.newSingleThreadExecutor();
             _amazonSQS = new AmazonSQSAsyncClient(clientConfiguration);
             _amazonSNS = new AmazonSNSAsyncClient(clientConfiguration);
         } else {
